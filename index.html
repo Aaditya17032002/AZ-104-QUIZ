@@ -996,46 +996,70 @@ function loadUserPerformance(username) {
         });
 }
 
-        function startQuiz(topic) {
-            hideAllSections();
-            document.getElementById('quizSection').classList.remove('hidden');
-            const quizContainer = document.getElementById('quizContainer');
-            quizContainer.innerHTML = '';
-            const selectedQuestions = questions[topic] || [];
-            selectedQuestions.forEach((currentQuestion, questionIndex) => {
-                const questionDiv = document.createElement('div');
-                questionDiv.className = 'mb-8 p-6 bg-white rounded-lg shadow';
-                questionDiv.innerHTML = `
-                    <h4 class="text-lg font-medium text-gray-900 mb-4">${currentQuestion.question}</h4>
-                    <div class="space-y-4">
-                        ${currentQuestion.options.map((option, index) => `
-                            <div class="flex items-center">
-                                <input id="option-${questionIndex}-${index}" name="question-${questionIndex}" type="radio" class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300" value="${option.text.charAt(0)}">
-                                <label for="option-${questionIndex}-${index}" class="ml-3 block text-sm font-medium text-gray-700">
-                                    ${option.text}
-                                </label>
-                            </div>
-                        `).join('')}
+function startQuiz(topic) {
+    hideAllSections();
+    document.getElementById('quizSection').classList.remove('hidden');
+    const quizContainer = document.getElementById('quizContainer');
+    quizContainer.innerHTML = '';
+    const selectedQuestions = questions[topic] || [];
+    
+    selectedQuestions.forEach((currentQuestion, questionIndex) => {
+        const questionDiv = document.createElement('div');
+        questionDiv.className = 'mb-8 p-6 bg-white rounded-lg shadow';
+        questionDiv.innerHTML = `
+            <h4 class="text-lg font-medium text-gray-900 mb-4">${currentQuestion.question}</h4>
+            <div class="space-y-4">
+                ${currentQuestion.options.map((option, index) => `
+                    <div class="flex items-center">
+                        <input id="option-${questionIndex}-${index}" name="question-${questionIndex}" type="radio" class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300" value="${option.text}">
+                        <label for="option-${questionIndex}-${index}" class="ml-3 block text-sm font-medium text-gray-700">
+                            ${option.text}
+                        </label>
                     </div>
-                    <div id="explanation-${questionIndex}" class="mt-4 p-4 bg-gray-100 rounded-md hidden">
-                        <p class="text-sm text-gray-700"></p>
-                    </div>
-                `;
-                quizContainer.appendChild(questionDiv);
+                `).join('')}
+            </div>
+            <div id="explanation-${questionIndex}" class="mt-4 p-4 bg-gray-100 rounded-md hidden">
+                <p class="text-sm text-gray-700"></p>
+            </div>
+        `;
+        quizContainer.appendChild(questionDiv);
 
-                // Add event listeners to radio buttons
-                questionDiv.querySelectorAll('input[type="radio"]').forEach((radio, index) => {
-                    radio.addEventListener('change', () => showExplanation(questionIndex, index, topic));
-                });
-            });
+        // Add event listeners to radio buttons for each question
+        questionDiv.querySelectorAll('input[type="radio"]').forEach((radio, index) => {
+            radio.addEventListener('change', () => handleAnswerSelection(questionIndex, index, topic));
+        });
+    });
 
-            // Add submit button
-            const submitButton = document.createElement('button');
-            submitButton.textContent = 'Submit Quiz';
-            submitButton.className = 'mt-4 inline-flex justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2';
-            submitButton.onclick = () => submitQuiz(topic);
-            quizContainer.appendChild(submitButton);
-        }
+    // Add submit button
+    const submitButton = document.createElement('button');
+    submitButton.textContent = 'Submit Quiz';
+    submitButton.className = 'mt-4 inline-flex justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2';
+    submitButton.onclick = () => submitQuiz(topic);
+    quizContainer.appendChild(submitButton);
+}
+
+function handleAnswerSelection(questionIndex, optionIndex, topic) {
+    const selectedOption = questions[topic][questionIndex].options[optionIndex];
+    
+    // Show explanation
+    const explanationDiv = document.getElementById(`explanation-${questionIndex}`);
+    const explanationText = explanationDiv.querySelector('p');
+
+    // Clear previous highlights
+    explanationDiv.classList.remove('bg-green-200', 'bg-red-200');
+
+    // Highlight the explanation based on correctness
+    if (selectedOption.isCorrect) {
+        explanationDiv.classList.add('bg-green-200');
+        explanationText.innerHTML = `<strong>Correct!</strong> ${selectedOption.explanation}`;
+    } else {
+        explanationDiv.classList.add('bg-red-200');
+        explanationText.innerHTML = `<strong>Incorrect!</strong> ${selectedOption.explanation}`;
+    }
+
+    explanationDiv.classList.remove('hidden');  // Show the explanation
+}
+
         function renderPerformanceChart(performanceHistory) {
     const ctx = document.getElementById('performanceChart').getContext('2d');
     new Chart(ctx, {
