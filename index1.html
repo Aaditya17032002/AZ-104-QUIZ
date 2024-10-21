@@ -1,0 +1,1286 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full bg-gray-100">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QuizMaster Pro - AZ-104 Certification</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+</head>
+<body class="h-full">
+    <div id="app" class="min-h-full">
+        <!-- Login Page -->
+        <div id="loginPage" class="flex min-h-full flex-col justify-center py-12 sm:px-6 lg:px-8">
+            <div class="sm:mx-auto sm:w-full sm:max-w-md">
+                <img class="mx-auto h-12 w-auto" src="logo.png" alt="Your Company">
+                <h2 class="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">Sign in to your account</h2>
+                <p class="mt-2 text-center text-sm text-gray-600">
+                    Or
+                    <a href="#" id="showSignupLink" class="font-medium text-indigo-600 hover:text-indigo-500">create a new account</a>
+                </p>
+            </div>
+
+            <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
+                <div class="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
+                    <form class="space-y-6" id="loginForm">
+                        <div>
+                            <label for="username" class="block text-sm font-medium text-gray-700">Username</label>
+                            <div class="mt-1">
+                                <input id="username" name="username" type="text" required class="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
+                            </div>
+                        </div>
+
+                        <div>
+                            <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
+                            <div class="mt-1">
+                                <input id="password" name="password" type="password" required class="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
+                            </div>
+                        </div>
+
+                        <div>
+                            <button type="submit" class="flex w-full justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Sign in</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Signup Page -->
+        <div id="signupPage" class="hidden flex min-h-full flex-col justify-center py-12 sm:px-6 lg:px-8">
+            <div class="sm:mx-auto sm:w-full sm:max-w-md">
+                <img class="mx-auto h-12 w-auto" src="logo.png" alt="Your Company">
+                <h2 class="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">Create a new account</h2>
+                <p class="mt-2 text-center text-sm text-gray-600">
+                    Or
+                    <a href="#" id="showLoginLink" class="font-medium text-indigo-600 hover:text-indigo-500">sign in to your account</a>
+                </p>
+            </div>
+
+            <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
+                <div class="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
+                    <form class="space-y-6" id="signupForm">
+                        <div>
+                            <label for="newUsername" class="block text-sm font-medium text-gray-700">Username</label>
+                            <div class="mt-1">
+                                <input id="newUsername" name="newUsername" type="text" required class="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
+                            </div>
+                        </div>
+
+                        <div>
+                            <label for="newPassword" class="block text-sm font-medium text-gray-700">Password</label>
+                            <div class="mt-1">
+                                <input id="newPassword" name="newPassword" type="password" required class="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
+                            </div>
+                        </div>
+
+                        <div>
+                            <label for="confirmPassword" class="block text-sm font-medium text-gray-700">Confirm Password</label>
+                            <div class="mt-1">
+                                <input id="confirmPassword" name="confirmPassword" type="password" required class="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
+                            </div>
+                        </div>
+
+                        <div>
+                            <button type="submit" class="flex w-full justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Sign up</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Application -->
+        <div id="mainApp" class="hidden">
+            <nav class="bg-gray-800">
+                <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+                    <div class="flex h-16 items-center justify-between">
+                        <div class="flex items-center">
+                            <div class="flex-shrink-0">
+                                <img class="h-8 w-8" src="logo.png" alt="QuizMaster Pro">
+                            </div>
+                            <div class="hidden md:block">
+                                <div class="ml-10 flex items-baseline space-x-4">
+                                    <a href="#" class="bg-gray-900 text-white rounded-md px-3 py-2 text-sm font-medium" aria-current="page" id="dashboardLink">Dashboard</a>
+                                    <a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium" id="topicsLink">Topics</a>
+                                    <a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium" id="addQuestionLink">Add Question</a>
+                                    <a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium" id="randomQuizLink">Random Quiz</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="hidden md:block">
+                            <div class="ml-4 flex items-center md:ml-6">
+                                <button type="button" class="rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800" id="logoutButton">
+                                    <span class="sr-only">Logout</span>
+                                    <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l-3 3m0 0l3 3m-3-3h12.75" />
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+
+            <header class="bg-white shadow">
+                <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
+                    <h1 class="text-3xl font-bold tracking-tight text-gray-900">AZ-104 Quiz Master Pro</h1>
+                </div>
+            </header>
+
+            <main>
+                <div class="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
+                    <!-- Dashboard Section -->
+                    <div id="dashboardSection">
+                        <div class="px-4 py-6 sm:px-0">
+                            <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                                <div class="bg-white overflow-hidden shadow rounded-lg">
+                                    <div class="p-5">
+                                        <div class="flex items-center">
+                                            <div class="flex-shrink-0 bg-indigo-500 rounded-md p-3">
+                                                <svg class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
+                                                </svg>
+                                            </div>
+                                            <div class="ml-5 w-0 flex-1">
+                                                <dl>
+                                                    <dt class="text-sm font-medium text-gray-500 truncate">
+                                                        Total Questions Attempted
+                                                    </dt>
+                                                    <dd class="text-3xl font-semibold text-gray-900" id="totalQuestionsAttempted">
+                                                        0
+                                                    </dd>
+                                                </dl>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="bg-white overflow-hidden shadow rounded-lg">
+                                    <div class="p-5">
+                                        <div class="flex items-center">
+                                            <div class="flex-shrink-0 bg-green-500 rounded-md p-3">
+                                                <svg class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                                </svg>
+                                            </div>
+                                            <div class="ml-5 w-0 flex-1">
+                                                <dl>
+                                                    <dt class="text-sm font-medium text-gray-500 truncate">
+                                                        Correct Answers
+                                                    </dt>
+                                                    <dd class="text-3xl font-semibold text-gray-900" id="correctAnswersPercentage">
+                                                        0%
+                                                    </dd>
+                                                </dl>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="bg-white overflow-hidden shadow rounded-lg">
+                                    <div class="p-5">
+                                        <div class="flex items-center">
+                                            <div class="flex-shrink-0 bg-yellow-500 rounded-md p-3">
+                                                <svg class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                                </svg>
+                                            </div>
+                                            <div class="ml-5 w-0 flex-1">
+                                                <dl>
+                                                    <dt class="text-sm font-medium text-gray-500 truncate">
+                                                        Average Time Per Question
+                                                    </dt>
+                                                    <dd class="text-3xl font-semibold  text-gray-900" id="averageTimePerQuestion">
+                                                        0s
+                                                    </dd>
+                                                </dl>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Add this inside the dashboard section -->
+        <div class="mt-8">
+            <div class="bg-white shadow rounded-lg">
+                <div class="px-4 py-5 sm:p-6">
+                    <h3 class="text-lg font-medium leading-6 text-gray-900">Real-time Performance</h3>
+                    <div class="mt-5">
+                        <canvas id="realTimeChart" width="400" height="200"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Add this for topic-based performance -->
+        <div class="mt-8">
+            <div class="bg-white shadow rounded-lg">
+                <div class="px-4 py-5 sm:p-6">
+                    <h3 class="text-lg font-medium leading-6 text-gray-900">Topic Performance</h3>
+                    <div class="mt-5">
+                        <canvas id="topicPerformanceChart" width="400" height="200"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+                        </div>
+                    </div>
+
+                    <!-- Topics Section -->
+                    <div id="topicsSection" class="hidden">
+                        <div class="bg-white shadow rounded-lg">
+                            <div class="px-4 py-5 sm:p-6">
+                                <h3 class="text-lg font-medium leading-6 text-gray-900">Topics</h3>
+                                <div class="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3" id="topicSelection">
+                                    <!-- Topics will be dynamically inserted here -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Quiz Section -->
+                    <div id="quizSection" class="hidden">
+                        <div class="bg-white shadow rounded-lg">
+                            <div class="px-4 py-5 sm:p-6">
+                                <h3 class="text-lg font-medium leading-6 text-gray-900">Quiz</h3>
+                                <div class="mt-5" id="quizContainer">
+                                    <!-- Quiz questions will be dynamically inserted here -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Add Question Section -->
+                    <div id="addQuestionSection" class="hidden">
+                        <div class="bg-white shadow rounded-lg">
+                            <div class="px-4 py-5 sm:p-6">
+                                <h3 class="text-lg font-medium leading-6 text-gray-900">Add New Question</h3>
+                                <div class="mt-5">
+                                    <form id="addQuestionForm" class="space-y-4">
+                                        <div>
+                                            <label for="newQuestion" class="block text-sm font-medium text-gray-700">Question</label>
+                                            <input type="text" name="newQuestion" id="newQuestion" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" placeholder="Enter your question here">
+                                        </div>
+                                        <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                                            <div>
+                                                <label for="optionA" class="block text-sm font-medium text-gray-700">Option A</label>
+                                                <input type="text" name="optionA" id="optionA" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" placeholder="Option A">
+                                            </div>
+                                            <div>
+                                                <label for="optionB" class="block text-sm font-medium text-gray-700">Option B</label>
+                                                <input type="text" name="optionB" id="optionB" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" placeholder="Option B">
+                                            </div>
+                                            <div>
+                                                <label for="optionC" class="block text-sm font-medium text-gray-700">Option C</label>
+                                                <input type="text" name="optionC" id="optionC" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" placeholder="Option C">
+                                            </div>
+                                            <div>
+                                                <label for="optionD" class="block text-sm font-medium text-gray-700">Option D</label>
+                                                <input type="text" name="optionD" id="optionD" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" placeholder="Option D">
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <label for="correctOption" class="block text-sm font-medium text-gray-700">Correct Option</label>
+                                            <select id="correctOption" name="correctOption" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+                                                <option value="A">Option A</option>
+                                                <option value="B">Option B</option>
+                                                <option value="C">Option C</option>
+                                                <option value="D">Option D</option>
+                                            </select>
+                                        </div>
+                                        <div>
+                                            <label for="topic" class="block text-sm font-medium text-gray-700">Topic</label>
+                                            <input type="text" name="topic" id="topic" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" placeholder="Enter the topic">
+                                        </div>
+                                        <div>
+                                            <button type="submit" class="inline-flex justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Add Question</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script>
+
+let users = [];
+
+fetch('user.json')
+    .then(response => response.json())
+    .then(data => {
+        users = data;
+    });
+
+        const questions = {
+            "Azure Virtual Machines": [
+    {
+        question: 'You have an Azure VM running Windows Server. You want to encrypt the OS disk to meet your company\'s security requirements. Which service should you use?',
+        options: [
+            { text: 'A. Azure Security Center', isCorrect: false, explanation: 'Incorrect! Use Azure Disk Encryption for OS disk encryption.' },
+            { text: 'B. Azure Disk Encryption', isCorrect: true, explanation: 'Correct! Azure Disk Encryption is used to encrypt the OS disk.' },
+            { text: 'C. Azure Monitor', isCorrect: false, explanation: 'Incorrect! Azure Monitor is used for monitoring resources.' },
+            { text: 'D. Azure Defender', isCorrect: false, explanation: 'Incorrect! Azure Defender is for threat protection.' }
+        ]
+    },
+    {
+        question: 'You need to configure network traffic so that only VMs within the same virtual network can communicate with each other. What should you configure?',
+        options: [
+            { text: 'A. User-defined routes', isCorrect: false, explanation: 'Incorrect! Use NSGs.' },
+            { text: 'B. Network Security Group (NSG) inbound rules', isCorrect: true, explanation: 'Correct! NSG inbound rules control traffic.' },
+            { text: 'C. Virtual Network Peering', isCorrect: false, explanation: 'Incorrect! Virtual Network Peering allows VMs in different VNets to communicate.' },
+            { text: 'D. Application Gateway', isCorrect: false, explanation: 'Incorrect! Application Gateway is for web traffic management.' }
+        ]
+    },
+    {
+        question: 'You have an AKS cluster and need to secure communication between pods within the cluster. What should you configure?',
+        options: [
+            { text: 'A. Azure Policy', isCorrect: false, explanation: 'Incorrect! Azure Policy is for compliance, not network policies.' },
+            { text: 'B. NSG Flow Logs', isCorrect: false, explanation: 'Incorrect! NSG Flow Logs monitor traffic but do not secure it.' },
+            { text: 'C. Azure Network Policies', isCorrect: true, explanation: 'Correct! Azure Network Policies are used to secure communication between pods.' },
+            { text: 'D. Calico Network Policies', isCorrect: false, explanation: 'Incorrect! While Calico can be used, Azure Network Policies are preferred.' }
+        ]
+    },
+    {
+        question: 'You are deploying a new Azure App Service. You need to ensure the app scales automatically based on CPU usage. What should you configure?',
+        options: [
+            { text: 'A. App Service Plan', isCorrect: false, explanation: 'Incorrect! App Service Plan alone does not handle scaling.' },
+            { text: 'B. Traffic Manager', isCorrect: false, explanation: 'Incorrect! Traffic Manager routes traffic but does not manage scaling.' },
+            { text: 'C. Auto-Scaling', isCorrect: true, explanation: 'Correct! Auto-Scaling allows your app to scale based on demand.' },
+            { text: 'D. Load Balancer', isCorrect: false, explanation: 'Incorrect! Load Balancer is for distributing traffic, not scaling.' }
+        ]
+    },
+    {
+        question: 'You have an Azure Active Directory (AAD) tenant. You need to ensure that users are prompted for multi-factor authentication (MFA) when accessing an external resource. Which tool should you configure?',
+        options: [
+            { text: 'A. Azure AD Connect', isCorrect: false, explanation: 'Incorrect! Azure AD Connect is for synchronizing directories.' },
+            { text: 'B. Conditional Access Policy', isCorrect: true, explanation: 'Correct! Conditional Access Policies can enforce MFA based on conditions.' },
+            { text: 'C. Azure Policy', isCorrect: false, explanation: 'Incorrect! Azure Policy is for compliance and governance.' },
+            { text: 'D. Azure Monitor', isCorrect: false, explanation: 'Incorrect! Azure Monitor is for tracking performance metrics.' }
+        ]
+    },
+    {
+        question: 'You want to monitor the CPU usage of your Azure VM and receive an alert when it exceeds 75%. What should you configure?',
+        options: [
+            { text: 'A. Azure Policy', isCorrect: false, explanation: 'Incorrect! Azure Policy is for governance, not monitoring.' },
+            { text: 'B. Azure Monitor', isCorrect: true, explanation: 'Correct! Azure Monitor can set alerts based on metrics like CPU usage.' },
+            { text: 'C. Azure Security Center', isCorrect: false, explanation: 'Incorrect! Security Center focuses on security posture, not performance.' },
+            { text: 'D. Azure Traffic Manager', isCorrect: false, explanation: 'Incorrect! Traffic Manager routes traffic but does not monitor performance.' }
+        ]
+    },
+    {
+        question: 'You have a storage account with blobs in the Hot access tier. You need to move the data to the Archive tier after 30 days of no activity. What should you configure?',
+        options: [
+            { text: 'A. Storage account settings', isCorrect: false, explanation: 'Incorrect! Settings alone won\'t manage the lifecycle of blobs.' },
+            { text: 'B. Lifecycle management rule', isCorrect: true, explanation: 'Correct! Lifecycle management rules automate moving blobs based on activity.' },
+            { text: 'C. Access tier policy', isCorrect: false, explanation: 'Incorrect! Access tier policies manage access levels but not lifecycle.' },
+            { text: 'D. Retention policy', isCorrect: false, explanation: 'Incorrect! Retention policies are for keeping data for a specific period.' }
+        ]
+    },
+    {
+        question: 'You need to configure a load balancer to ensure that traffic is evenly distributed across a set of Azure VMs. Which setting should you configure?',
+        options: [
+            { text: 'A. Health probe', isCorrect: true, explanation: 'Correct! Health probes check the health of VMs to route traffic properly.' },
+            { text: 'B. Session Persistence', isCorrect: false, explanation: 'Incorrect! Session Persistence keeps users connected but doesn\'t distribute traffic.' },
+            { text: 'C. Inbound NAT rule', isCorrect: false, explanation: 'Incorrect! NAT rules map external traffic to internal VMs, not distribute it.' },
+            { text: 'D. Backend Pool', isCorrect: false, explanation: 'Incorrect! Backend Pools define VMs but don\'t control traffic distribution.' }
+        ]
+    },
+    {
+        question: 'You are deploying a containerized application to an AKS cluster. Which command should you use to deploy the YAML file?',
+        options: [
+            { text: 'A. az aks create', isCorrect: false, explanation: 'Incorrect! This command creates an AKS cluster, not deploys apps.' },
+            { text: 'B. az aks update', isCorrect: false, explanation: 'Incorrect! This command updates an AKS cluster, not deploys apps.' },
+            { text: 'C. kubectl apply', isCorrect: true, explanation: 'Correct! kubectl apply is used to deploy resources defined in a YAML file.' },
+            { text: 'D. az aks deploy', isCorrect: false, explanation: 'Incorrect! There is no such command as az aks deploy.' }
+        ]
+    },
+    {
+        question: 'You want to configure role-based access control (RBAC) for an Azure Storage account. You need to ensure that a user can read and write data to the blob storage but cannot manage the storage account itself. Which role should you assign?',
+        options: [
+            { text: 'A. Storage Account Contributor', isCorrect: false, explanation: 'Incorrect! This role allows management of the storage account.' },
+            { text: 'B. Storage Blob Data Contributor', isCorrect: true, explanation: 'Correct! This role allows reading and writing to blob storage without managing the account.' },
+            { text: 'C. Contributor', isCorrect: false, explanation: 'Incorrect! Contributor allows full access to resources.' },
+            { text: 'D. Reader', isCorrect: false, explanation: 'Incorrect! Reader only allows read access, not write access.' }
+        ]
+    },
+    {
+        question: 'You have an Azure App Service hosting a web app. You need to configure a custom domain for the web app. What is the first step you should take?',
+        options: [
+            { text: 'A. Create a DNS record', isCorrect: true, explanation: 'Correct! You need to create a DNS record to point to the Azure App Service.' },
+            { text: 'B. Upload an SSL certificate', isCorrect: false, explanation: 'Incorrect! Uploading an SSL certificate comes after the DNS record is created.' },
+            { text: 'C. Configure Traffic Manager', isCorrect: false, explanation: 'Incorrect! Traffic Manager is for routing traffic, not for domain configuration.' },
+            { text: 'D. Create an NSG rule', isCorrect: false, explanation: 'Incorrect! NSG rules manage traffic but are not related to domain configuration.' }
+        ]
+    },
+    {
+        question: 'You are deploying several Azure VMs and need to ensure they can communicate securely with on-premises resources over a private connection. What should you configure?',
+        options: [
+            { text: 'A. Virtual Network Peering', isCorrect: false, explanation: 'Incorrect! Virtual Network Peering connects VNets, not on-premises resources.' },
+            { text: 'B. Site-to-Site VPN', isCorrect: true, explanation: 'Correct! A Site-to-Site VPN allows secure communication between on-premises and Azure.' },
+            { text: 'C. ExpressRoute', isCorrect: false, explanation: 'Incorrect! ExpressRoute is for dedicated connections, but a Site-to-Site VPN suffices for many use cases.' },
+            { text: 'D. Application Gateway', isCorrect: false, explanation: 'Incorrect! Application Gateway is for web traffic management, not VPN.' }
+        ]
+    },
+    {
+        question: 'You want to track when a user is assigned the Owner role in any resource group. What should you configure?',
+        options: [
+            { text: 'A. Azure Monitor', isCorrect: false, explanation: 'Incorrect! Azure Monitor tracks resource metrics but not role assignments.' },
+            { text: 'B. Azure Security Center', isCorrect: false, explanation: 'Incorrect! Security Center focuses on security threats.' },
+            { text: 'C. Azure Activity Log', isCorrect: true, explanation: 'Correct! The Activity Log tracks changes in role assignments.' },
+            { text: 'D. Role-Based Access Control (RBAC)', isCorrect: false, explanation: 'Incorrect! RBAC is for permissions, not tracking changes.' }
+        ]
+    },
+    {
+        question: 'You need to ensure that the Azure Firewall deployed in your subscription can use a public IP address for outbound traffic. What should you configure?',
+        options: [
+            { text: 'A. Static IP Address', isCorrect: true, explanation: 'Correct! A static public IP is required for outbound traffic.' },
+            { text: 'B. NSG Flow Logs', isCorrect: false, explanation: 'Incorrect! Flow logs are for monitoring traffic, not for configuring IP addresses.' },
+            { text: 'C. Health Probe', isCorrect: false, explanation: 'Incorrect! Health probes check the health of services, not IP configurations.' },
+            { text: 'D. Application Gateway', isCorrect: false, explanation: 'Incorrect! Application Gateway manages web traffic but doesn\'t configure IP addresses.' }
+        ]
+    }
+],
+
+            "Azure Networking": [
+    {
+        question: 'You have an Azure VM in the East US region. You need to create a backup solution that ensures the VM can be restored in case of a disaster. Which Azure service should you use?',
+        options: [
+            { text: 'A. Azure Backup', isCorrect: true, explanation: 'Correct! Azure Backup provides backup solutions for Azure VMs.' },
+            { text: 'B. Azure Site Recovery', isCorrect: false, explanation: 'Incorrect! Site Recovery is for disaster recovery, not backups.' },
+            { text: 'C. Azure Monitor', isCorrect: false, explanation: 'Incorrect! Azure Monitor is for monitoring resources.' },
+            { text: 'D. Azure Advisor', isCorrect: false, explanation: 'Incorrect! Azure Advisor provides recommendations for optimizing resources.' }
+        ]
+    },
+    {
+        question: 'You need to ensure that all traffic from a specific IP address is denied access to your Azure VM. What should you configure?',
+        options: [
+            { text: 'A. NSG Inbound Rule', isCorrect: true, explanation: 'Correct! NSG inbound rules can deny access based on IP.' },
+            { text: 'B. Route Table', isCorrect: false, explanation: 'Incorrect! Route Tables manage routing but not access.' },
+            { text: 'C. UDR Rule', isCorrect: false, explanation: 'Incorrect! User-Defined Routes manage traffic paths, not access.' },
+            { text: 'D. Load Balancer Rule', isCorrect: false, explanation: 'Incorrect! Load Balancer rules distribute traffic but do not manage access.' }
+        ]
+    },
+    {
+        question: 'You plan to deploy a Kubernetes cluster in Azure using Azure Kubernetes Service (AKS). You need to ensure that the cluster scales automatically based on load. Which solution should you configure?',
+        options: [
+            { text: 'A. Azure Monitor', isCorrect: false, explanation: 'Incorrect! Azure Monitor tracks performance but does not scale.' },
+            { text: 'B. Horizontal Pod Autoscaler', isCorrect: true, explanation: 'Correct! Horizontal Pod Autoscaler automatically scales pods based on load.' },
+            { text: 'C. Azure Load Balancer', isCorrect: false, explanation: 'Incorrect! Load Balancer distributes traffic, not scaling.' },
+            { text: 'D. Azure Traffic Manager', isCorrect: false, explanation: 'Incorrect! Traffic Manager manages traffic routing, not scaling.' }
+        ]
+    },
+    {
+        question: 'You have a storage account that contains confidential data. You need to generate a shared access signature (SAS) that allows access for a specific period. Which settings should you configure?',
+        options: [
+            { text: 'A. Permissions and expiry time', isCorrect: true, explanation: 'Correct! You must configure permissions and an expiry time for the SAS.' },
+            { text: 'B. Network security and routing', isCorrect: false, explanation: 'Incorrect! Network security settings do not affect SAS.' },
+            { text: 'C. Resource group and location', isCorrect: false, explanation: 'Incorrect! Resource group and location do not impact SAS configuration.' },
+            { text: 'D. Access tier and replication', isCorrect: false, explanation: 'Incorrect! Access tier and replication are not related to SAS.' }
+        ]
+    },
+    {
+        question: 'You need to deploy an Azure web app and configure a custom domain for the app. Which setting must be configured first?',
+        options: [
+            { text: 'A. Custom DNS record', isCorrect: true, explanation: 'Correct! You need to create a DNS record pointing to the Azure web app.' },
+            { text: 'B. SSL certificate', isCorrect: false, explanation: 'Incorrect! Uploading an SSL certificate is done after configuring the DNS.' },
+            { text: 'C. Traffic Manager profile', isCorrect: false, explanation: 'Incorrect! Traffic Manager is for managing traffic across regions.' },
+            { text: 'D. IP Restrictions', isCorrect: false, explanation: 'Incorrect! IP Restrictions are for security, not initial configuration.' }
+        ]
+    },
+    {
+        question: 'You have an Azure subscription with multiple virtual networks (VNets) in different regions. You need to enable communication between the VNets without traversing the internet. What should you use?',
+        options: [
+            { text: 'A. VNet Peering', isCorrect: true, explanation: 'Correct! VNet Peering allows direct communication between VNets.' },
+            { text: 'B. Site-to-Site VPN', isCorrect: false, explanation: 'Incorrect! Site-to-Site VPN connects on-premises networks to Azure.' },
+            { text: 'C. ExpressRoute', isCorrect: false, explanation: 'Incorrect! ExpressRoute is for private connections, not inter-VNet communication.' },
+            { text: 'D. Application Gateway', isCorrect: false, explanation: 'Incorrect! Application Gateway manages web traffic but does not connect VNets.' }
+        ]
+    },
+    {
+        question: 'You have an Azure App Service plan configured with multiple web apps. You need to scale the web apps automatically based on CPU usage. Which Azure service should you configure?',
+        options: [
+            { text: 'A. Auto-Scaling', isCorrect: true, explanation: 'Correct! Auto-Scaling allows apps to scale based on demand.' },
+            { text: 'B. Azure Monitor', isCorrect: false, explanation: 'Incorrect! Azure Monitor tracks performance but does not manage scaling.' },
+            { text: 'C. Azure Load Balancer', isCorrect: false, explanation: 'Incorrect! Load Balancer distributes traffic, not manages scaling.' },
+            { text: 'D. Azure Traffic Manager', isCorrect: false, explanation: 'Incorrect! Traffic Manager routes traffic across regions.' }
+        ]
+    },
+    {
+        question: 'You are setting up a Point-to-Site VPN for secure connections to Azure resources. What is the minimum requirement for authentication?',
+        options: [
+            { text: 'A. A certificate for each client', isCorrect: true, explanation: 'Correct! Certificate-based authentication is required for Point-to-Site VPN.' },
+            { text: 'B. A shared key', isCorrect: false, explanation: 'Incorrect! Shared keys are used for Site-to-Site VPN.' },
+            { text: 'C. Role-based access control', isCorrect: false, explanation: 'Incorrect! RBAC is for managing permissions, not VPN authentication.' },
+            { text: 'D. IPsec Policy', isCorrect: false, explanation: 'Incorrect! IPsec policies are for securing VPN traffic.' }
+        ]
+    },
+    {
+        question: 'You have an Azure Active Directory (AAD) tenant and want to assign a user the ability to create and manage virtual machines, but not manage networking. Which role should you assign?',
+        options: [
+            { text: 'A. Virtual Machine Contributor', isCorrect: true, explanation: 'Correct! This role allows managing VMs without networking access.' },
+            { text: 'B. Owner', isCorrect: false, explanation: 'Incorrect! Owner role allows full access to resources, including networking.' },
+            { text: 'C. Reader', isCorrect: false, explanation: 'Incorrect! Reader role only allows read access.' },
+            { text: 'D. Network Contributor', isCorrect: false, explanation: 'Incorrect! This role allows managing networking resources.' }
+        ]
+    },
+    {
+        question: 'You need to move data from an on-premises server to Azure Blob storage. Which tool should you use for the transfer?',
+        options: [
+            { text: 'A. Azure Data Box', isCorrect: true, explanation: 'Correct! Azure Data Box is used for transferring large amounts of data.' },
+            { text: 'B. AzCopy', isCorrect: false, explanation: 'Incorrect! AzCopy is for transferring data but is not suitable for large datasets directly from on-premises.' },
+            { text: 'C. Azure Import/Export', isCorrect: false, explanation: 'Incorrect! This service is for importing and exporting data using disks.' },
+            { text: 'D. Azure File Sync', isCorrect: false, explanation: 'Incorrect! Azure File Sync is for syncing files between on-premises and Azure.' }
+        ]
+    },
+    {
+        question: 'You have an Azure VM running a web server that needs to be backed up daily. You want to ensure the backups are stored in a different region. What should you configure?',
+        options: [
+            { text: 'A. Geo-Redundant Storage (GRS)', isCorrect: true, explanation: 'Correct! GRS ensures backups are stored in a different region.' },
+            { text: 'B. Locally Redundant Storage (LRS)', isCorrect: false, explanation: 'Incorrect! LRS only keeps copies in the same region.' },
+            { text: 'C. Zone-Redundant Storage (ZRS)', isCorrect: false, explanation: 'Incorrect! ZRS protects against datacenter failures within a region.' },
+            { text: 'D. Read-Access Geo-Redundant Storage (RA-GRS)', isCorrect: false, explanation: 'Incorrect! RA-GRS allows read access to data in the secondary region but does not provide backups.' }
+        ]
+    },
+    {
+        question: 'You need to allow a developer to manage and deploy applications in an AKS cluster without providing access to modify the cluster’s networking. Which RBAC role should you assign?',
+        options: [
+            { text: 'A. Contributor', isCorrect: false, explanation: 'Incorrect! Contributor role allows managing all resources.' },
+            { text: 'B. Network Contributor', isCorrect: false, explanation: 'Incorrect! Network Contributor can modify network settings.' },
+            { text: 'C. Kubernetes Cluster Admin', isCorrect: false, explanation: 'Incorrect! Cluster Admin has full access to the cluster.' },
+            { text: 'D. Kubernetes Service Contributor', isCorrect: true, explanation: 'Correct! This role allows managing and deploying applications without modifying networking.' }
+        ]
+    },
+    {
+        question: 'You want to use an Azure storage account to store audit logs that must be retained for five years. What feature should you configure?',
+        options: [
+            { text: 'A. Storage Blob Data Contributor', isCorrect: false, explanation: 'Incorrect! This role is for managing blob data, not retention.' },
+            { text: 'B. Soft Delete', isCorrect: false, explanation: 'Incorrect! Soft delete helps recover deleted blobs, not retention.' },
+            { text: 'C. Lifecycle Management', isCorrect: true, explanation: 'Correct! Lifecycle Management can help manage data retention.' },
+            { text: 'D. Azure Policy', isCorrect: false, explanation: 'Incorrect! Azure Policy enforces rules but does not manage data retention.' }
+        ]
+    },
+    {
+        question: 'You have multiple Azure web apps hosted in the same region. You need to route requests to the app with the least latency. Which service should you use?',
+        options: [
+            { text: 'A. Azure Traffic Manager', isCorrect: true, explanation: 'Correct! Traffic Manager routes traffic based on latency.' },
+            { text: 'B. Azure Load Balancer', isCorrect: false, explanation: 'Incorrect! Load Balancer distributes traffic but does not manage latency.' },
+            { text: 'C. Azure Front Door', isCorrect: false, explanation: 'Incorrect! Front Door optimizes web traffic but does not route by latency alone.' },
+            { text: 'D. Application Gateway', isCorrect: false, explanation: 'Incorrect! Application Gateway manages web traffic but does not optimize for latency.' }
+        ]
+    },
+    {
+        question: 'You are setting up a Point-to-Site VPN for secure connections to Azure resources. What is the minimum requirement for authentication?',
+        options: [
+            { text: 'A. A certificate for each client', isCorrect: true, explanation: 'Correct! Certificate-based authentication is required for Point-to-Site VPN.' },
+            { text: 'B. A shared key', isCorrect: false, explanation: 'Incorrect! Shared keys are used for Site-to-Site VPN.' },
+            { text: 'C. Role-based access control', isCorrect: false, explanation: 'Incorrect! RBAC is for managing permissions, not VPN authentication.' },
+            { text: 'D. IPsec policy', isCorrect: false, explanation: 'Incorrect! IPsec policies are for securing VPN traffic.' }
+        ]
+    }
+],
+"Azure Active Directory": [
+    {
+        question: 'You have an Azure Active Directory (AAD) tenant. You need to ensure that users are prompted for multi-factor authentication (MFA) when accessing an external resource. Which tool should you configure?',
+        options: [
+            { text: 'A. Azure AD Connect', isCorrect: false, explanation: 'Incorrect! Azure AD Connect is for synchronizing directories.' },
+            { text: 'B. Conditional Access Policy', isCorrect: true, explanation: 'Correct! Conditional Access Policies can enforce MFA based on conditions.' },
+            { text: 'C. Azure Policy', isCorrect: false, explanation: 'Incorrect! Azure Policy is for compliance and governance.' },
+            { text: 'D. Azure Monitor', isCorrect: false, explanation: 'Incorrect! Azure Monitor is for tracking performance metrics.' }
+        ]
+    },
+    {
+        question: 'You are setting up a Point-to-Site VPN for secure connections to Azure resources. What is the minimum requirement for authentication?',
+        options: [
+            { text: 'A. A certificate for each client', isCorrect: true, explanation: 'Correct! Certificate-based authentication is required for Point-to-Site VPN.' },
+            { text: 'B. A shared key', isCorrect: false, explanation: 'Incorrect! Shared keys are used for Site-to-Site VPN.' },
+            { text: 'C. Role-based access control', isCorrect: false, explanation: 'Incorrect! RBAC is for managing permissions, not VPN authentication.' },
+            { text: 'D. IPsec policy', isCorrect: false, explanation: 'Incorrect! IPsec policies are for securing VPN traffic.' }
+        ]
+    },
+    {
+        question: 'You have an Azure Active Directory (AAD) tenant and want to assign a user the ability to create and manage virtual machines, but not manage networking. Which role should you assign?',
+        options: [
+            { text: 'A. Virtual Machine Contributor', isCorrect: true, explanation: 'Correct! This role allows managing VMs without networking access.' },
+            { text: 'B. Owner', isCorrect: false, explanation: 'Incorrect! Owner role allows full access to resources, including networking.' },
+            { text: 'C. Reader', isCorrect: false, explanation: 'Incorrect! Reader role only allows read access.' },
+            { text: 'D. Network Contributor', isCorrect: false, explanation: 'Incorrect! This role allows managing networking resources.' }
+        ]
+    },
+    {
+        question: 'You have an Azure AD tenant and want to enable self-service password reset (SSPR) for all users. What is the minimum number of authentication methods required for users to reset their passwords?',
+        options: [
+            { text: 'A. 1', isCorrect: false, explanation: 'Incorrect! At least two methods are required.' },
+            { text: 'B. 2', isCorrect: true, explanation: 'Correct! Users need at least two authentication methods for SSPR.' },
+            { text: 'C. 3', isCorrect: false, explanation: 'Incorrect! The minimum is two, not three.' },
+            { text: 'D. 4', isCorrect: false, explanation: 'Incorrect! The minimum is two, not four.' }
+        ]
+    },
+    {
+        question: 'You are setting up a Point-to-Site VPN to allow secure connections to your Azure virtual network. Which authentication method should you use?',
+        options: [
+            { text: 'A. Certificate-based authentication', isCorrect: true, explanation: 'Correct! Certificate-based authentication is a common method for VPN.' },
+            { text: 'B. Shared key authentication', isCorrect: false, explanation: 'Incorrect! Shared keys are primarily used for Site-to-Site VPN.' },
+            { text: 'C. Azure Active Directory (AAD) authentication', isCorrect: false, explanation: 'Incorrect! AAD authentication is used for managing users, not VPN authentication.' },
+            { text: 'D. Multi-Factor Authentication (MFA)', isCorrect: false, explanation: 'Incorrect! MFA is used for additional security, not specifically for VPN.' }
+        ]
+    },
+    {
+        question: 'You have an Azure Active Directory (AAD) tenant and want to enforce multi-factor authentication (MFA) for all global administrators. Which tool should you use?',
+        options: [
+            { text: 'A. Azure Policy', isCorrect: false, explanation: 'Incorrect! Azure Policy is for compliance and governance.' },
+            { text: 'B. Conditional Access Policy', isCorrect: true, explanation: 'Correct! Conditional Access Policies can enforce MFA for global admins.' },
+            { text: 'C. Azure AD Connect', isCorrect: false, explanation: 'Incorrect! Azure AD Connect is for synchronizing directories.' },
+            { text: 'D. Azure Monitor', isCorrect: false, explanation: 'Incorrect! Azure Monitor is for tracking performance metrics.' }
+        ]
+    },
+    {
+        question: 'You have an Azure AD tenant and need to configure access for a user who can read and modify user properties but cannot delete users. Which role should you assign?',
+        options: [
+            { text: 'A. User Administrator', isCorrect: false, explanation: 'Incorrect! User Administrator can delete users.' },
+            { text: 'B. Directory Reader', isCorrect: false, explanation: 'Incorrect! Directory Reader only allows read access.' },
+            { text: 'C. User Access Administrator', isCorrect: true, explanation: 'Correct! User Access Administrator can read and modify user properties without deletion rights.' },
+            { text: 'D. Security Administrator', isCorrect: false, explanation: 'Incorrect! Security Administrator has broader permissions, including user deletion.' }
+        ]
+    },
+    {
+        question: 'You need to set up conditional access for users to access specific resources based on their location. What should you configure?',
+        options: [
+            { text: 'A. Azure AD Identity Protection', isCorrect: false, explanation: 'Incorrect! Identity Protection is for risk-based conditional access.' },
+            { text: 'B. Azure AD Conditional Access', isCorrect: true, explanation: 'Correct! Conditional Access allows location-based access control.' },
+            { text: 'C. Azure AD Roles', isCorrect: false, explanation: 'Incorrect! Roles are for permissions, not access conditions.' },
+            { text: 'D. Azure Monitor', isCorrect: false, explanation: 'Incorrect! Azure Monitor is for tracking performance metrics, not conditional access.' }
+        ]
+    }
+],
+"Azure App Services": [
+    {
+        question: 'You are deploying a new Azure App Service. You need to ensure the app scales automatically based on CPU usage. What should you configure?',
+        options: [
+            { text: 'A. App Service Plan', isCorrect: true, explanation: 'Correct! App Service Plan allows you to configure scaling based on resource usage.' },
+            { text: 'B. Azure Monitor', isCorrect: false, explanation: 'Incorrect! Azure Monitor tracks performance but does not manage scaling.' },
+            { text: 'C. Traffic Manager', isCorrect: false, explanation: 'Incorrect! Traffic Manager manages traffic routing but does not handle scaling.' },
+            { text: 'D. Load Balancer', isCorrect: false, explanation: 'Incorrect! Load Balancer distributes traffic but does not manage scaling.' }
+        ]
+    },
+    {
+        question: 'You have an Azure App Service hosting a web app. You need to configure a custom domain for the web app. What is the first step you should take?',
+        options: [
+            { text: 'A. Create a DNS record', isCorrect: true, explanation: 'Correct! You must create a DNS record pointing to your Azure App Service.' },
+            { text: 'B. Upload an SSL certificate', isCorrect: false, explanation: 'Incorrect! Uploading an SSL certificate is done after the DNS record is created.' },
+            { text: 'C. Configure Traffic Manager', isCorrect: false, explanation: 'Incorrect! Traffic Manager is for managing traffic across regions.' },
+            { text: 'D. Configure Azure Active Directory', isCorrect: false, explanation: 'Incorrect! AAD is for user management, not for domain configuration.' }
+        ]
+    },
+    {
+        question: 'You have an Azure App Service plan configured with multiple web apps. You need to scale the web apps automatically based on CPU usage. Which Azure service should you configure?',
+        options: [
+            { text: 'A. Auto-Scaling', isCorrect: true, explanation: 'Correct! Auto-Scaling allows web apps to scale based on demand.' },
+            { text: 'B. Azure Monitor', isCorrect: false, explanation: 'Incorrect! Azure Monitor tracks performance but does not manage scaling.' },
+            { text: 'C. Azure Load Balancer', isCorrect: false, explanation: 'Incorrect! Load Balancer distributes traffic but does not handle scaling.' },
+            { text: 'D. Traffic Manager', isCorrect: false, explanation: 'Incorrect! Traffic Manager routes traffic based on performance metrics but does not handle scaling.' }
+        ]
+    },
+    {
+        question: 'You have an Azure App Service and want to ensure that it scales automatically based on CPU usage. What feature should you configure?',
+        options: [
+            { text: 'A. Manual Scaling', isCorrect: false, explanation: 'Incorrect! Manual Scaling requires user intervention.' },
+            { text: 'B. Auto-Scaling', isCorrect: true, explanation: 'Correct! Auto-Scaling allows your app to scale based on demand.' },
+            { text: 'C. Application Insights', isCorrect: false, explanation: 'Incorrect! Application Insights is used for monitoring, not scaling.' },
+            { text: 'D. Azure Advisor', isCorrect: false, explanation: 'Incorrect! Azure Advisor provides recommendations but does not handle scaling.' }
+        ]
+    },
+    {
+        question: 'You have a web app running in Azure App Service. You need to monitor performance issues and resource consumption. Which service should you use?',
+        options: [
+            { text: 'A. Azure Monitor', isCorrect: true, explanation: 'Correct! Azure Monitor provides insights into performance and resource usage.' },
+            { text: 'B. Azure Traffic Manager', isCorrect: false, explanation: 'Incorrect! Traffic Manager routes traffic but does not monitor performance.' },
+            { text: 'C. Azure Application Gateway', isCorrect: false, explanation: 'Incorrect! Application Gateway manages web traffic but does not monitor performance.' },
+            { text: 'D. Azure Security Center', isCorrect: false, explanation: 'Incorrect! Security Center focuses on security posture, not performance monitoring.' }
+        ]
+    },
+    {
+        question: 'You need to configure an Azure App Service to allow access only through a custom domain. What is the first step you should take?',
+        options: [
+            { text: 'A. Create a DNS record', isCorrect: true, explanation: 'Correct! You need to create a DNS record that points to your Azure App Service.' },
+            { text: 'B. Configure SSL', isCorrect: false, explanation: 'Incorrect! SSL configuration comes after setting up the custom domain.' },
+            { text: 'C. Set up Traffic Manager', isCorrect: false, explanation: 'Incorrect! Traffic Manager is for managing traffic across multiple regions.' },
+            { text: 'D. Enable Application Insights', isCorrect: false, explanation: 'Incorrect! Application Insights is for monitoring performance, not for domain configuration.' }
+        ]
+    },
+    {
+        question: 'You have an Azure App Service plan and need to automatically scale the web apps hosted on it based on CPU utilization. Which Azure service should you configure?',
+        options: [
+            { text: 'A. Azure Monitor', isCorrect: false, explanation: 'Incorrect! Azure Monitor is used for monitoring but not directly for scaling.' },
+            { text: 'B. Auto-Scaling', isCorrect: true, explanation: 'Correct! Auto-Scaling adjusts resources based on demand and utilization.' },
+            { text: 'C. Load Balancer', isCorrect: false, explanation: 'Incorrect! Load Balancer distributes incoming traffic but does not handle scaling.' },
+            { text: 'D. Traffic Manager', isCorrect: false, explanation: 'Incorrect! Traffic Manager optimizes traffic routing but does not manage scaling.' }
+        ]
+    }
+],
+"Azure Security": [
+    {
+        question: 'You need to ensure that the Azure Firewall deployed in your subscription can use a public IP address for outbound traffic. What should you configure?',
+        options: [
+            { text: 'A. Static Public IP', isCorrect: true, explanation: 'Correct! You must configure a static public IP for outbound traffic.' },
+            { text: 'B. NSG Rules', isCorrect: false, explanation: 'Incorrect! NSG rules do not configure IP addresses.' },
+            { text: 'C. VPN Gateway', isCorrect: false, explanation: 'Incorrect! VPN Gateway is used for secure connections, not for outbound IP.' },
+            { text: 'D. Azure Traffic Manager', isCorrect: false, explanation: 'Incorrect! Traffic Manager is for routing, not for IP configurations.' }
+        ]
+    },
+    {
+        question: 'You want to configure a Network Security Group (NSG) to log all traffic through your virtual network. Which log type should you enable?',
+        options: [
+            { text: 'A. Security Logs', isCorrect: false, explanation: 'Incorrect! Security Logs do not capture NSG traffic.' },
+            { text: 'B. Activity Logs', isCorrect: false, explanation: 'Incorrect! Activity Logs track resource changes, not traffic.' },
+            { text: 'C. Diagnostic Logs', isCorrect: false, explanation: 'Incorrect! Diagnostic Logs provide insights but are not specific for traffic.' },
+            { text: 'D. Azure Security Center', isCorrect: true, explanation: 'Correct! Azure Security Center can log NSG traffic for monitoring.' }
+        ]
+    }
+],"Azure Storage": [
+    {
+        question: 'You want to configure role-based access control (RBAC) for an Azure Storage account. You need to ensure that a user can read and write data to the blob storage but cannot manage the storage account itself. Which role should you assign?',
+        options: [
+            { text: 'A. Storage Account Contributor', isCorrect: false, explanation: 'Incorrect! This role allows management of the storage account.' },
+            { text: 'B. Storage Blob Data Contributor', isCorrect: true, explanation: 'Correct! This role allows reading and writing to blob storage without managing the account.' },
+            { text: 'C. Storage Account Reader', isCorrect: false, explanation: 'Incorrect! This role only allows read access to the storage account.' }
+        ]
+    },
+    {
+        question: 'You need to move data from an on-premises server to Azure Blob storage. Which tool should you use for the transfer?',
+        options: [
+            { text: 'A. AzCopy', isCorrect: true, explanation: 'Correct! AzCopy is designed for transferring data to and from Azure Blob storage.' },
+            { text: 'B. Azure Storage Explorer', isCorrect: false, explanation: 'Incorrect! Storage Explorer is for managing storage but not for bulk transfers.' },
+            { text: 'C. Azure Data Box', isCorrect: false, explanation: 'Incorrect! Data Box is for large data transfers when internet is not feasible.' },
+            { text: 'D. Azure Import/Export', isCorrect: false, explanation: 'Incorrect! Import/Export service is used for transferring data via physical disks.' }
+        ]
+    },
+    {
+        question: 'You need to move 10 TB of data from an on-premises data center to an Azure Blob Storage account. Which Azure service should you use?',
+        options: [
+            { text: 'A. AzCopy', isCorrect: true, explanation: 'Correct! AzCopy is the best option for transferring large amounts of data.' },
+            { text: 'B. Azure Data Box', isCorrect: false, explanation: 'Incorrect! Data Box is used for large data transfers via physical disks, not over the internet.' },
+            { text: 'C. Azure Import/Export', isCorrect: false, explanation: 'Incorrect! Import/Export is not suitable for transferring data over the internet.' },
+            { text: 'D. Azure File Sync', isCorrect: false, explanation: 'Incorrect! File Sync is for syncing files, not for transferring large datasets.' }
+        ]
+    },
+    {
+        question: 'You have an Azure Storage account with blobs in the Hot access tier. You want to move them to the Archive tier after 60 days of no activity. What should you configure?',
+        options: [
+            { text: 'A. Lifecycle Management rules', isCorrect: true, explanation: 'Correct! Lifecycle Management rules automate tier transitions based on activity.' },
+            { text: 'B. Manual Tier Change', isCorrect: false, explanation: 'Incorrect! Manual changes do not automate the process.' },
+            { text: 'C. Azure Data Factory', isCorrect: false, explanation: 'Incorrect! Data Factory is for data integration, not for lifecycle management.' },
+            { text: 'D. Storage Account Settings', isCorrect: false, explanation: 'Incorrect! Account settings do not handle lifecycle rules.' }
+        ]
+    },
+    {
+        question: 'You have an Azure Storage account that needs to store data that is accessed infrequently. You want to minimize costs. Which storage tier should you use?',
+        options: [
+            { text: 'A. Cool', isCorrect: true, explanation: 'Correct! The Cool tier is designed for infrequently accessed data.' },
+            { text: 'B. Hot', isCorrect: false, explanation: 'Incorrect! The Hot tier is for frequently accessed data.' },
+            { text: 'C. Archive', isCorrect: false, explanation: 'Incorrect! The Archive tier is for rarely accessed data and has retrieval costs.' },
+            { text: 'D. Premium', isCorrect: false, explanation: 'Incorrect! Premium is for high-performance storage.' }
+        ]
+    },
+    {
+        question: 'You want to move 5 TB of data to an Azure Blob Storage account. What Azure service will you use to import this data securely?',
+        options: [
+            { text: 'A. Azure Data Box', isCorrect: true, explanation: 'Correct! Azure Data Box allows secure transfer of large datasets to Azure.' },
+            { text: 'B. AzCopy', isCorrect: false, explanation: 'Incorrect! AzCopy is for internet transfers, not for importing physical datasets.' },
+            { text: 'C. Azure Import/Export', isCorrect: false, explanation: 'Incorrect! Import/Export is not for secure physical transfers.' },
+            { text: 'D. Azure Storage Explorer', isCorrect: false, explanation: 'Incorrect! Storage Explorer is for managing and not for importing large datasets.' }
+        ]
+    }
+],
+"Azure App Services": [
+    {
+        question: 'You are deploying a new Azure App Service. You need to ensure the app scales automatically based on CPU usage. What should you configure?',
+        options: [
+            { text: 'A. App Service Plan', isCorrect: true, explanation: 'Correct! App Service Plan allows you to configure scaling based on resource usage.' },
+            { text: 'B. Azure Monitor', isCorrect: false, explanation: 'Incorrect! Azure Monitor tracks performance but does not manage scaling.' },
+            { text: 'C. Traffic Manager', isCorrect: false, explanation: 'Incorrect! Traffic Manager manages traffic routing but does not handle scaling.' },
+            { text: 'D. Load Balancer', isCorrect: false, explanation: 'Incorrect! Load Balancer distributes traffic but does not manage scaling.' }
+        ]
+    },
+    {
+        question: 'You have an Azure App Service hosting a web app. You need to configure a custom domain for the web app. What is the first step you should take?',
+        options: [
+            { text: 'A. Create a DNS record', isCorrect: true, explanation: 'Correct! You must create a DNS record pointing to your Azure App Service.' },
+            { text: 'B. Upload an SSL certificate', isCorrect: false, explanation: 'Incorrect! Uploading an SSL certificate is done after the DNS record is created.' },
+            { text: 'C. Configure Traffic Manager', isCorrect: false, explanation: 'Incorrect! Traffic Manager is for managing traffic across regions.' },
+            { text: 'D. Configure Azure Active Directory', isCorrect: false, explanation: 'Incorrect! AAD is for user management, not for domain configuration.' }
+        ]
+    },
+    {
+        question: 'You have an Azure App Service plan configured with multiple web apps. You need to scale the web apps automatically based on CPU usage. Which Azure service should you configure?',
+        options: [
+            { text: 'A. Auto-Scaling', isCorrect: true, explanation: 'Correct! Auto-Scaling allows web apps to scale based on demand.' },
+            { text: 'B. Azure Monitor', isCorrect: false, explanation: 'Incorrect! Azure Monitor tracks performance but does not manage scaling.' },
+            { text: 'C. Azure Load Balancer', isCorrect: false, explanation: 'Incorrect! Load Balancer distributes traffic but does not handle scaling.' },
+            { text: 'D. Traffic Manager', isCorrect: false, explanation: 'Incorrect! Traffic Manager routes traffic based on performance metrics but does not handle scaling.' }
+        ]
+    },
+    {
+        question: 'You have an Azure App Service and want to ensure that it scales automatically based on CPU usage. What feature should you configure?',
+        options: [
+            { text: 'A. Manual Scaling', isCorrect: false, explanation: 'Incorrect! Manual Scaling requires user intervention.' },
+            { text: 'B. Auto-Scaling', isCorrect: true, explanation: 'Correct! Auto-Scaling allows your app to scale based on demand.' },
+            { text: 'C. Application Insights', isCorrect: false, explanation: 'Incorrect! Application Insights is used for monitoring, not scaling.' },
+            { text: 'D. Azure Advisor', isCorrect: false, explanation: 'Incorrect! Azure Advisor provides recommendations but does not handle scaling.' }
+        ]
+    },
+    {
+        question: 'You have a web app running in Azure App Service. You need to monitor performance issues and resource consumption. Which service should you use?',
+        options: [
+            { text: 'A. Azure Monitor', isCorrect: true, explanation: 'Correct! Azure Monitor provides insights into performance and resource usage.' },
+            { text: 'B. Azure Traffic Manager', isCorrect: false, explanation: 'Incorrect! Traffic Manager routes traffic but does not monitor performance.' },
+            { text: 'C. Azure Application Gateway', isCorrect: false, explanation: 'Incorrect! Application Gateway manages web traffic but does not monitor performance.' },
+            { text: 'D. Azure Security Center', isCorrect: false, explanation: 'Incorrect! Security Center focuses on security posture, not performance monitoring.' }
+        ]
+    },
+    {
+        question: 'You need to configure an Azure App Service to allow access only through a custom domain. What is the first step you should take?',
+        options: [
+            { text: 'A. Create a DNS record', isCorrect: true, explanation: 'Correct! You need to create a DNS record that points to your Azure App Service.' },
+            { text: 'B. Configure SSL', isCorrect: false, explanation: 'Incorrect! SSL configuration comes after setting up the custom domain.' },
+            { text: 'C. Set up Traffic Manager', isCorrect: false, explanation: 'Incorrect! Traffic Manager is for managing traffic across multiple regions.' },
+            { text: 'D. Enable Application Insights', isCorrect: false, explanation: 'Incorrect! Application Insights is for monitoring performance, not for domain configuration.' }
+        ]
+    },
+    {
+        question: 'You have an Azure App Service plan and need to automatically scale the web apps hosted on it based on CPU utilization. Which Azure service should you configure?',
+        options: [
+            { text: 'A. Azure Monitor', isCorrect: false, explanation: 'Incorrect! Azure Monitor is used for monitoring but not directly for scaling.' },
+            { text: 'B. Auto-Scaling', isCorrect: true, explanation: 'Correct! Auto-Scaling adjusts resources based on demand and utilization.' },
+            { text: 'C. Load Balancer', isCorrect: false, explanation: 'Incorrect! Load Balancer distributes incoming traffic but does not handle scaling.' },
+            { text: 'D. Traffic Manager', isCorrect: false, explanation: 'Incorrect! Traffic Manager optimizes traffic routing but does not manage scaling.' }
+        ]
+    }
+],
+"Azure Monitoring and Management": [
+    {
+        question: 'Which of the following actions can be done using Azure Monitor\'s Network Insights?',
+        options: [
+            { text: 'A. Key Management Contributor', isCorrect: false, explanation: 'Incorrect! This role is unrelated to Azure Monitor.' },
+            { text: 'B. (No relevant option found)', isCorrect: false, explanation: 'N/A' },
+            { text: 'C. Azure App Insights', isCorrect: false, explanation: 'Incorrect! Azure App Insights is for application monitoring, not Network Insights.' }
+        ]
+    }
+],
+
+
+            // Continue adding topics and their respective questions...
+        };
+
+        let currentUser = null;
+        let userPerformance = {};
+
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const username = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
+    const user = users.find(u => u.username === username && u.password === password);
+    if (user) {
+        loadUserPerformance(username);  // Load user's performance
+        document.getElementById('loginPage').classList.add('hidden');
+        document.getElementById('mainApp').classList.remove('hidden');
+    } else {
+        alert('Invalid username or password');
+    }
+});
+
+        // Signup functionality
+        document.getElementById('signupForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const newUsername = document.getElementById('newUsername').value;
+            const newPassword = document.getElementById('newPassword').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+
+            if (newPassword !== confirmPassword) {
+                alert('Passwords do not match');
+                return;
+            }
+
+            if (users.some(u => u.username === newUsername)) {
+                alert('Username already exists');
+                return;
+            }
+
+            users.push({ username: newUsername, password: newPassword });
+            alert('Account created successfully. You can now log in.');
+            showLoginPage();
+        });
+
+        // Show signup page
+        document.getElementById('showSignupLink').addEventListener('click', function(e) {
+            e.preventDefault();
+            document.getElementById('loginPage').classList.add('hidden');
+            document.getElementById('signupPage').classList.remove('hidden');
+        });
+
+        // Show login page
+        document.getElementById('showLoginLink').addEventListener('click', function(e) {
+            e.preventDefault();
+            showLoginPage();
+        });
+
+        function showLoginPage() {
+            document.getElementById('signupPage').classList.add('hidden');
+            document.getElementById('loginPage').classList.remove('hidden');
+        }
+
+        // Logout functionality
+        document.getElementById('logoutButton').addEventListener('click', function() {
+            currentUser = null;
+            document.getElementById('mainApp').classList.add('hidden');
+            showLoginPage();
+        });
+
+        // Navigation
+        document.getElementById('dashboardLink').addEventListener('click', showDashboard);
+        document.getElementById('topicsLink').addEventListener('click', showTopics);
+        document.getElementById('addQuestionLink').addEventListener('click', showAddQuestion);
+        document.getElementById('randomQuizLink').addEventListener('click', startRandomQuiz);
+
+        function showDashboard() {
+            hideAllSections();
+            document.getElementById('dashboardSection').classList.remove('hidden');
+            updateDashboard();
+        }
+
+        function showTopics() {
+            hideAllSections();
+            document.getElementById('topicsSection').classList.remove('hidden');
+            renderTopics();
+        }
+
+        function showAddQuestion() {
+            hideAllSections();
+            document.getElementById('addQuestionSection').classList.remove('hidden');
+        }
+
+        function hideAllSections() {
+            document.getElementById('dashboardSection').classList.add('hidden');
+            document.getElementById('topicsSection').classList.add('hidden');
+            document.getElementById('quizSection').classList.add('hidden');
+            document.getElementById('addQuestionSection').classList.add('hidden');
+        }
+
+        function renderTopics() {
+            const topicSelection = document.getElementById('topicSelection');
+            topicSelection.innerHTML = '';
+            Object.keys(questions).forEach(topic => {
+                const topicButton = document.createElement('button');
+                topicButton.textContent = topic;
+                topicButton.className = 'inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-indigo-700 bg-indigo-100 hover:bg-indigo-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500';
+                topicButton.onclick = () => startQuiz(topic);
+                topicSelection.appendChild(topicButton);
+            });
+        }
+
+        // Function to load user performance
+function loadUserPerformance(username) {
+    fetch(`${username}.json`)
+        .then(response => response.json())
+        .then(data => {
+            updateDashboard(data);
+            renderPerformanceChart(data.performanceHistory);
+        });
+}
+
+        function startQuiz(topic) {
+            hideAllSections();
+            document.getElementById('quizSection').classList.remove('hidden');
+            const quizContainer = document.getElementById('quizContainer');
+            quizContainer.innerHTML = '';
+            const selectedQuestions = questions[topic] || [];
+            selectedQuestions.forEach((currentQuestion, questionIndex) => {
+                const questionDiv = document.createElement('div');
+                questionDiv.className = 'mb-8 p-6 bg-white rounded-lg shadow';
+                questionDiv.innerHTML = `
+                    <h4 class="text-lg font-medium text-gray-900 mb-4">${currentQuestion.question}</h4>
+                    <div class="space-y-4">
+                        ${currentQuestion.options.map((option, index) => `
+                            <div class="flex items-center">
+                                <input id="option-${questionIndex}-${index}" name="question-${questionIndex}" type="radio" class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300" value="${option.text.charAt(0)}">
+                                <label for="option-${questionIndex}-${index}" class="ml-3 block text-sm font-medium text-gray-700">
+                                    ${option.text}
+                                </label>
+                            </div>
+                        `).join('')}
+                    </div>
+                    <div id="explanation-${questionIndex}" class="mt-4 p-4 bg-gray-100 rounded-md hidden">
+                        <p class="text-sm text-gray-700"></p>
+                    </div>
+                `;
+                quizContainer.appendChild(questionDiv);
+
+                // Add event listeners to radio buttons
+                questionDiv.querySelectorAll('input[type="radio"]').forEach((radio, index) => {
+                    radio.addEventListener('change', () => showExplanation(questionIndex, index, topic));
+                });
+            });
+
+            // Add submit button
+            const submitButton = document.createElement('button');
+            submitButton.textContent = 'Submit Quiz';
+            submitButton.className = 'mt-4 inline-flex justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2';
+            submitButton.onclick = () => submitQuiz(topic);
+            quizContainer.appendChild(submitButton);
+        }
+        function renderPerformanceChart(performanceHistory) {
+    const ctx = document.getElementById('performanceChart').getContext('2d');
+    new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4'],  // You can adjust this based on the number of entries
+            datasets: [{
+                label: 'Performance Over Time',
+                data: performanceHistory,
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 2,
+                fill: false,
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+}
+
+function updateRealTimeChart() {
+            const ctx = document.getElementById('realTimeChart').getContext('2d');
+            let chart;
+
+            function addData() {
+                const newData = Math.random() * 100; // Simulating real-time data
+                chart.data.labels.push(new Date().toLocaleTimeString());
+                chart.data.datasets[0].data.push(newData);
+                
+                if (chart.data.labels.length > 10) {
+                    chart.data.labels.shift();
+                    chart.data.datasets[0].data.shift();
+                }
+                
+                chart.update();
+            }
+
+            chart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: [],
+                    datasets: [{
+                        label: 'Real-time Performance',
+                        data: [],
+                        borderColor: 'rgb(75, 192, 192)',
+                        tension: 0.1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            max: 100
+                        }
+                    }
+                }
+            });
+
+            setInterval(addData, 2000); // Update every 2 seconds
+        }
+
+        function showExplanation(questionIndex, optionIndex, topic) {
+            const explanationDiv = document.getElementById(`explanation-${questionIndex}`);
+            const selectedOption = questions[topic][questionIndex].options[optionIndex];
+            explanationDiv.querySelector('p').innerHTML = `<strong>${selectedOption.isCorrect ? 'Correct!' : 'Incorrect!'}</strong> ${selectedOption.explanation}`;
+            explanationDiv.classList.remove('hidden');
+        }
+
+        function submitQuiz(topic) {
+            const quizContainer = document.getElementById('quizContainer');
+            const selectedQuestions = questions[topic] || [];
+            let correctAnswers = 0;
+            let totalQuestions = selectedQuestions.length;
+
+            selectedQuestions.forEach((question, index) => {
+                const selectedOption = quizContainer.querySelector(`input[name="question-${index}"]:checked`);
+                if (selectedOption) {
+                    const isCorrect = question.options.find(option => option.text.startsWith(selectedOption.value)).isCorrect;
+                    if (isCorrect) correctAnswers++;
+                }
+            });
+
+            const score = (correctAnswers / totalQuestions) * 100;
+            alert(`You scored ${score.toFixed(2)}% (${correctAnswers} out of ${totalQuestions})`);
+
+            // Update user performance
+            if (!userPerformance[currentUser]) {
+                userPerformance[currentUser] = [];
+            }
+            userPerformance[currentUser].push({
+                date: new Date().toISOString(),
+                topic: topic,
+                score: score,
+                questionsAttempted: totalQuestions
+            });
+
+            saveUserData();
+            showDashboard();
+        }
+
+        function startRandomQuiz() {
+            const allQuestions = Object.values(questions).flat();
+            const randomQuestions = allQuestions.sort(() => 0.5 - Math.random()).slice(0, 10);
+            const randomTopic = 'Random Quiz';
+            questions[randomTopic] = randomQuestions;
+            startQuiz(randomTopic);
+        }
+
+        document.getElementById('addQuestionForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            addQuestion();
+        });
+
+        function addQuestion() {
+            const newQuestion = document.getElementById('newQuestion').value;
+            const optionA = document.getElementById('optionA').value;
+            const optionB = document.getElementById('optionB').value;
+            const optionC = document.getElementById('optionC').value;
+            const optionD = document.getElementById('optionD').value;
+            const correctOption = document.getElementById('correctOption').value;
+            const topic = document.getElementById('topic').value;
+
+            const newQuestionData = {
+                question: newQuestion,
+                options: [
+                    { text: `A. ${optionA}`, isCorrect: correctOption === 'A', explanation: '' },
+                    { text: `B. ${optionB}`, isCorrect: correctOption === 'B', explanation: '' },
+                    { text: `C. ${optionC}`, isCorrect: correctOption === 'C', explanation: '' },
+                    { text: `D. ${optionD}`, isCorrect: correctOption === 'D', explanation: '' }
+                ]
+            };
+
+            if (questions[topic]) {
+                questions[topic].push(newQuestionData);
+            } else {
+                questions[topic] = [newQuestionData];
+            }
+
+            alert('Question added successfully!');
+            document.getElementById('addQuestionForm').reset();
+        }
+
+        function updateDashboard() {
+            const userData = userPerformance[currentUser] || [];
+            const totalQuestionsAttempted = userData.reduce((total, quiz) => total + quiz.questionsAttempted, 0);
+            const totalCorrectAnswers = userData.reduce((total, quiz) => total + (quiz.score / 100 * quiz.questionsAttempted), 0);
+            const averageScore = userData.length > 0 ? userData.reduce((total, quiz) => total + quiz.score, 0) / userData.length : 0;
+
+            document.getElementById('totalQuestionsAttempted').textContent = totalQuestionsAttempted;
+            document.getElementById('correctAnswersPercentage').textContent = `${(totalCorrectAnswers / totalQuestionsAttempted * 100 || 0).toFixed(2)}%`;
+            document.getElementById('averageTimePerQuestion').textContent = 'N/A'; // We don't track time per question in this implementation
+
+            updateRealTimeChart();
+            updateTopicPerformanceChart();
+        }
+
+        function updatePerformanceChart(userData) {
+            const ctx = document.getElementById('performanceChart').getContext('2d');
+            const chartData = userData.map(quiz => ({
+                x: new Date(quiz.date),
+                y: quiz.score
+            }));
+
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    datasets: [{
+                        label: 'Quiz Scores',
+                        data: chartData,
+                        borderColor: 'rgb(75, 192, 192)',
+                        tension: 0.1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        x: {
+                            type: 'time',
+                            time: {
+                                unit: 'day'
+                            }
+                        },
+                        y: {
+                            beginAtZero: true,
+                            max: 100
+                        }
+                    }
+                }
+            });
+        }
+
+        function updateTopicPerformanceChart() {
+            const ctx = document.getElementById('topicPerformanceChart').getContext('2d');
+            const topics = Object.keys(questions);
+            const data = topics.map(() => Math.floor(Math.random() * 100)); // Simulating topic performance data
+
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: topics,
+                    datasets: [{
+                        label: 'Topic Performance',
+                        data: data,
+                        backgroundColor: 'rgba(75, 192, 192, 0.6)',
+                        borderColor: 'rgb(75, 192, 192)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            max: 100
+                        }
+                    }
+                }
+            });
+        }
+
+        function showDashboard() {
+            hideAllSections();
+            document.getElementById('dashboardSection').classList.remove('hidden');
+            updateDashboard();
+        }
+
+        // Simulated file storage
+        function saveUserData() {
+            localStorage.setItem(`userPerformance_${currentUser}`, JSON.stringify(userPerformance[currentUser]));
+        }
+
+        function loadUserData() {
+            const storedData = localStorage.getItem(`userPerformance_${currentUser}`);
+            if (storedData) {
+                userPerformance[currentUser] = JSON.parse(storedData);
+            }
+        }
+
+        // Initialize the application
+        loadUserData();   
+    </script>
+</body>
+</html>
